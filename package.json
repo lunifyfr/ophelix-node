@@ -1,0 +1,70 @@
+{
+  "name": "@ophelix/node",
+  "version": "0.1.0",
+  "description": "Bibliothèque Node officielle de l'API Ophelix : facturation de l'Assurance Maladie.",
+  "keywords": [
+    "ophelix",
+    "fse",
+    "sesam-vitale",
+    "assurance-maladie",
+    "api"
+  ],
+  "homepage": "https://docs.ophelix.fr/guides/bibliotheques",
+  "bugs": {
+    "url": "https://github.com/lunifyfr/ophelix-node/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lunifyfr/ophelix-node.git"
+  },
+  "license": "MIT",
+  "author": "Lunify SAS",
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=20.3"
+  },
+  "scripts": {
+    "build": "tsup",
+    "lint": "biome check .",
+    "format": "biome check --write .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run --project unit",
+    "test:integration": "vitest run --project integration",
+    "smoke": "node scripts/smoke.cjs && node scripts/smoke.mjs",
+    "prepublishOnly": "npm run lint && npm run typecheck && npm test && npm run build && npm run smoke"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.6.6",
+    "@types/node": "^20.19.43",
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.3",
+    "vitest": "^4.1.12"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  }
+}
